@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-//import 'package:maps_example/yandex_map_page.dart';
 import 'package:maps_example/screen.dart';
-
-//import 'google_map_page.dart';
 
 const googleApiKey = "AIzaSyBLR3iEOULZSNtuNNhhGLIpTASvwxvVLg4";
 
@@ -20,6 +17,6 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.deepPurple,
         ),
-        home: FirstScreen());
+        home: const FirstScreen());
   }
 }

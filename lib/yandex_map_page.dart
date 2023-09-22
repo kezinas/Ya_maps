@@ -33,20 +33,16 @@ class _YandexMapPageState extends State<YandexMapPage> {
         children: [
           FloatingActionButton(onPressed: () {
             //final String a = (p.latitude.toString() + p.longitude.toString());
-            points.add(
-                last.latitude.toString() + " " + last.longitude.toString());
-            print(p.latitude.toString() + p.longitude.toString());
+            points.add("${last.latitude} ${last.longitude}");
             Navigator.pop(context);
           }),
           Expanded(
             child: Container(
               padding: const EdgeInsets.all(8),
-              // Виджет для отрисовки Яндекс карты
               child: YandexMap(
-                mapObjects: _mapObjects, // объекты, которые будут на карте
-                onMapCreated:
-                    _onMapCreated, // метод, который вызывает при создании. через него мы получаем контроллер
-                onMapTap: _addMarker, // обработчик нажатия на карту
+                mapObjects: _mapObjects,
+                onMapCreated: _onMapCreated,
+                onMapTap: _addMarker,
               ),
             ),
           ),
@@ -83,24 +79,18 @@ class _YandexMapPageState extends State<YandexMapPage> {
         return;
       }
     }
-    // Получаем текущую локацию
     LocationData locationData = await _location.getLocation();
-    // Рисуем точку для отметки на карте
     _placemarkIcon = await _rawPlacemarkImage();
-    // Определяем точку с текущей позицией
     final point = Point(
         latitude: locationData.latitude!, longitude: locationData.longitude!);
     p = point;
-    // Добавляем маркер
     await _addMarker(point);
-    // Двигаем камеру к точке
     await _controller.moveCamera(
         CameraUpdate.newCameraPosition(CameraPosition(target: point)));
   }
 
   Future _addMarker(Point point) async {
     _mapObjects.add(
-      // PlacemarkMapObject означает отметку на карте в виде обычной точки
       PlacemarkMapObject(
         mapId: _mapObjectId,
         point: point,
@@ -113,7 +103,6 @@ class _YandexMapPageState extends State<YandexMapPage> {
     );
     setState(() {});
     last = point;
-    print(point.latitude.toString() + point.longitude.toString());
   }
 
   Future<Uint8List> _rawPlacemarkImage() async {

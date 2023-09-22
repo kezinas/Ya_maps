@@ -16,7 +16,7 @@ class _FirstScreenState extends State<FirstScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text('List of Points')),
+        appBar: AppBar(title: const Text('List of Points')),
         backgroundColor: Colors.deepPurple,
         body: Column(children: [
           Expanded(
@@ -24,7 +24,8 @@ class _FirstScreenState extends State<FirstScreen> {
                 padding: const EdgeInsets.all(8),
                 itemCount: points.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return Text(points[index], style: TextStyle(fontSize: 22));
+                  return Text(points[index],
+                      style: const TextStyle(fontSize: 22));
                 }),
           ),
           FloatingActionButton(
@@ -33,12 +34,12 @@ class _FirstScreenState extends State<FirstScreen> {
               final value = await Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) {
-                  return YandexMapPage();
+                  return const YandexMapPage();
                 }),
               );
               setState(() {});
             },
-            child: Text('+'),
+            child: const Text('+'),
           )
         ]));
   }
